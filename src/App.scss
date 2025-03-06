@@ -8,3 +8,60 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 1200px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1390px !important;
+  }
+}
+
+.app-container {
+  .header-container {
+    .navbar {
+      z-index: 10;
+      opacity: 70%;
+      .nav-link {
+        &.active {
+          color: red;
+        }
+      }
+    }
+  }
+}
+
+.homepage-contain {
+  video {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+  }
+
+}
+
+.homepage-contain{
+  // display: flex;
+  // justify-content: flex-end;
+  // padding: 20px;
+  .homepage-content {
+    padding: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+  }
+  .content-main{
+    font-size: 45px;
+  }
+  .content-small{
+    margin: 0px;
+  }
+}
+
+
