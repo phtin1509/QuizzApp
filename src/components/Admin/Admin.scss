@@ -32,4 +32,13 @@
               }
         }
     }
+
+    .admin-content{
+      .admin-header{
+        border: 5px red;
+      }
+      .admin-content{
+        border: 5px blue;
+      }
+    }
 }

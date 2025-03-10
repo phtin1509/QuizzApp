@@ -8,6 +8,7 @@ import {
 } from 'react-pro-sidebar';
 import sidebarBg from '../../assets/bg2.jpg';
 import { MdAdminPanelSettings } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 
 const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
@@ -46,6 +47,7 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
                         // suffix={<span className="badge red">New</span>}
                         >
                             Dashboard
+                            <Link to="/admin" />
                         </MenuItem>
                         {/* <MenuItem icon={<FaGem />}> Component</MenuItem> */}
                     </Menu>
@@ -56,7 +58,9 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
                             icon={<FaGem />}
                             title="Features"
                         >
-                            <MenuItem> Quản lý User</MenuItem>
+                            <MenuItem> Quản lý User
+                            <Link to="/admin/manage-users" />
+                            </MenuItem>
                             <MenuItem> Quản lý bài Quizz</MenuItem>
                             <MenuItem> Quản lý câu hỏi</MenuItem>
                         </SubMenu>
