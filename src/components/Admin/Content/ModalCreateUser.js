@@ -3,17 +3,19 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
 
 const ModalCreateUser = (props) => {
     const { show, setShow } = props
     const handleClose = () => {
         setShow(false)
-        setEmail(''); 
-        setPassword(''); 
-        setUsername(''); 
-        setRole('ADMIN'); 
-        setImage(''); 
-        };
+        setEmail('');
+        setPassword('');
+        setUsername('');
+        setRole('ADMIN');
+        setImage('');
+    };
     const handleShow = () => setShow(true);
 
     const [email, setEmail] = useState('');
@@ -32,7 +34,27 @@ const ModalCreateUser = (props) => {
         }
     }
 
-    const handleSaveChanges = async() => {
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
+
+
+    const handleSaveChanges = async () => {
+        const isinvalid = validateEmail(email)
+        if (!isinvalid) {
+            toast.error('Email is invalid');
+            return;
+        }
+        if (!password) {
+            toast.error('Password is required');
+            return;
+        }
+
+
         // call api
         // const data = {
         //     email: email,
@@ -49,8 +71,14 @@ const ModalCreateUser = (props) => {
         data.append("role", role);
         data.append('userImage', image);
 
-        const response = axios.post('http://localhost:8081/api/v1/participant', data)
-        console.log('object :>> ', response);
+        const response = await axios.post('http://localhost:8081/api/v1/participant', data)
+        console.log('object :>> ', response.data);
+        if(response.data && response.data.EC === 0){
+            toast.success('Add user successfully');
+            handleClose();
+        }
+        if(response.data && response.data.EC !== 0){
+            toast.error('Add user failed')}
     }
     return (
         <>
