@@ -2,10 +2,18 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
+import axios from 'axios';
 
-const ModalCreateUser = () => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+const ModalCreateUser = (props) => {
+    const { show, setShow } = props
+    const handleClose = () => {
+        setShow(false)
+        setEmail(''); 
+        setPassword(''); 
+        setUsername(''); 
+        setRole('ADMIN'); 
+        setImage(''); 
+        };
     const handleShow = () => setShow(true);
 
     const [email, setEmail] = useState('');
@@ -23,16 +31,37 @@ const ModalCreateUser = () => {
             setPreviewImage('');
         }
     }
+
+    const handleSaveChanges = async() => {
+        // call api
+        // const data = {
+        //     email: email,
+        //     password: password,
+        //     username: username,
+        //     role: role,
+        //     image: image
+        // }
+
+        const data = new FormData();
+        data.append('email', email);
+        data.append("password", password);
+        data.append('username', username);
+        data.append("role", role);
+        data.append('userImage', image);
+
+        const response = axios.post('http://localhost:8081/api/v1/participant', data)
+        console.log('object :>> ', response);
+    }
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            {/* <Button variant="primary" onClick={handleShow}>
                 Add User
-            </Button>
+            </Button> */}
 
             <Modal show={show} onHide={handleClose}
-            size='xl'
-            backdrop="static"
-            className='modal-create-user'>
+                size='xl'
+                backdrop="static"
+                className='modal-create-user'>
                 <Modal.Header closeButton>
                     <Modal.Title>Add New User</Modal.Title>
                 </Modal.Header>
@@ -72,14 +101,14 @@ const ModalCreateUser = () => {
                         <div className='col-md-12'>
                             <label className="form-label label-upload"
                                 htmlFor='label-upload'
-                                >
+                            >
                                 <FcPlus />
                                 Upload File Image</label>
-                            <input type="file" id="label-upload" hidden onChange={(event) => handleUploadImage(event)}/>
+                            <input type="file" id="label-upload" hidden onChange={(event) => handleUploadImage(event)} />
                         </div>
                         <div className='col-md-12 img-preview'>
                             {
-                                previewImage ? <img src={previewImage} alt=''/>
+                                previewImage ? <img src={previewImage} alt='' />
                                     : <span>Image Preview</span>
                             }
                         </div>
@@ -89,7 +118,7 @@ const ModalCreateUser = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={() => handleSaveChanges()}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
