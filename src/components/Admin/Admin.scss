@@ -1,6 +1,6 @@
 .admin-container {
     display: flex;
-
+    flex-wrap: nowrap;
     .sidebar-container {
         .pro-sidebar {
             height: 100vh;
@@ -34,11 +34,12 @@
     }
 
     .admin-content{
+      width: 100%;
       .admin-header{
-        border: 5px red;
+        
       }
-      .admin-content{
-        border: 5px blue;
+      .admin-main{
+        
       }
     }
 }
