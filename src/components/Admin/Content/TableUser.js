@@ -27,7 +27,8 @@ const TableUser = (props) => {
                                 <td>{item.role}</td>
                                 <td>
                                     <button className="btn btn-secondary">View</button>
-                                    <button className="btn btn-primary mx-3">Edit</button>
+                                    <button className="btn btn-primary mx-3"
+                                        onClick={() => props.handleClickBtnEdit(item)}>Edit</button>
                                     <button className="btn btn-danger">Delete</button>
                                 </td>
                             </tr>
@@ -35,9 +36,9 @@ const TableUser = (props) => {
                     })}
                     {listUser && listUser.length === 0 && <tr>
                         <td colSpan={5}>Not Found</td>
-                        </tr>}
+                    </tr>}
 
-                    </tbody>
+                </tbody>
             </table>
         </>)
 }
