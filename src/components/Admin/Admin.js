@@ -3,7 +3,7 @@ import "./Admin.scss"
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { ToastContainer, toast, Bounce } from 'react-toastify';
+import { ToastContainer, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Admin = (props) => {

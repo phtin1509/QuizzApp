@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import TableUser from './TableUser';
 import { getAllUsers } from '../../../services/apiService';
 import ModalUpdateUser from './ModalUpdateUser';
+import { set } from "lodash";
 
 const ManageUser = (props) => {
     const [showModal, setShowModal] = useState(false);
@@ -28,7 +29,10 @@ const ManageUser = (props) => {
         setDataUpdate(user);
         setShowModalUpdateUser(true);
     }
-
+    
+    const resetDataUpdate = () => {
+        setDataUpdate({});
+    }
     return (
         <div className="manage-users-container">
             <div className="title">
@@ -40,17 +44,20 @@ const ManageUser = (props) => {
             </div>
             <div className="users-list">
                 <TableUser listUser={listUser}
-                handleClickBntEdit={handleClickBtnEdit}/>
+                    handleClickBtnEdit={handleClickBtnEdit} />
 
             </div>
             <ModalCreateUser
-            show={showModal}
-            setShow={setShowModal}
-            fetchListUser={fetchListUser} />
+                show={showModal}
+                setShow={setShowModal}
+                fetchListUser={fetchListUser} />
             <ModalUpdateUser
-            show={showModalUpdateUser}
-            setShow={setShowModalUpdateUser}
-            dataUpdate={dataUpdate}/>
+                show={showModalUpdateUser}
+                setShow={setShowModalUpdateUser}
+                dataUpdate={dataUpdate} 
+                fetchListUser={fetchListUser}
+                resetDataUpdate={resetDataUpdate}/>
+                
         </div>
     )
 }

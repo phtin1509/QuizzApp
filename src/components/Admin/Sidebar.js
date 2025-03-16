@@ -1,6 +1,6 @@
 import 'react-pro-sidebar/dist/css/styles.css';
 import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
+import { FaTachometerAlt, FaGem, FaGithub } from 'react-icons/fa';
 import {
     SidebarHeader,
     SidebarFooter,

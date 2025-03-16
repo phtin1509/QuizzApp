@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { postCreateNewUser } from '../../../services/apiService';
+import {putUpdateUser} from '../../../services/apiService';
 import _ from 'lodash';
 
 const ModalUpdateUser = (props) => {
@@ -17,6 +17,7 @@ const ModalUpdateUser = (props) => {
         setUsername('');
         setRole('USER');
         setImage('');
+        props.resetDataUpdate();
     };
 
     const [email, setEmail] = useState('');
@@ -36,7 +37,7 @@ const ModalUpdateUser = (props) => {
                 setPreviewImage(`data:image/png;base64,${dataUpdate.image}`);
             }
         }
-    }, [props.dataUpdate])
+    }, [dataUpdate])
     
 
     const handleUploadImage = (event) => {
@@ -63,10 +64,8 @@ const ModalUpdateUser = (props) => {
             toast.error('Email is invalid');
             return;
         }
-        if (!password) {
-            toast.error('Password is required');
-            return;
-        }
+
+        let data= await putUpdateUser(dataUpdate.id, username, role, image);
 
 
         // call api
@@ -80,7 +79,6 @@ const ModalUpdateUser = (props) => {
 
         
 
-        const data = await postCreateNewUser(email, password, username, role, image);
         console.log('object :>> ', data);
         if (data && data.EC === 0) {
             toast.success('Add user successfully');

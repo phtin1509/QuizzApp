@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-
-
 const TableUser = (props) => {
     const { listUser } = props;
 

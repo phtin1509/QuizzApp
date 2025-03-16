@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { postCreateNewUser } from '../../../services/apiService';
 
@@ -16,7 +15,6 @@ const ModalCreateUser = (props) => {
         setRole('ADMIN');
         setImage('');
     };
-    const handleShow = () => setShow(true);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
