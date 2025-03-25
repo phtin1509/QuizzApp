@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import TableUser from './TableUser';
 import { getAllUsers } from '../../../services/apiService';
 import ModalUpdateUser from './ModalUpdateUser';
-import { set } from "lodash";
+
 
 const ManageUser = (props) => {
     const [showModal, setShowModal] = useState(false);
